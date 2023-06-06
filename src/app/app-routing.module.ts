@@ -5,6 +5,7 @@ import {ProductComponent} from "./product/product.component";
 import {CartComponent} from "./cart/cart.component";
 import {productGuard} from "./guards/product/product.guard";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {cartItemsResolver} from "./guards/cart/cart.resolve";
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    component: CartComponent
+    component: CartComponent,
+    resolve: {
+      items: cartItemsResolver
+    }
   },
   {
     path: 'not-found',
