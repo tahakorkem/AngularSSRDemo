@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {ProductComponent} from "./product/product.component";
 import {CartComponent} from "./cart/cart.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -15,8 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    component: CartComponent,
-  }
+    component: CartComponent
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+  },
+  {path: '**', redirectTo: 'not-found'}
 ];
 
 @NgModule({
