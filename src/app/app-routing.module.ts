@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {ProductComponent} from "./product/product.component";
 import {CartComponent} from "./cart/cart.component";
+import {productGuard} from "./guards/product/product.guard";
 import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductComponent,
+    canActivate: [productGuard]
   },
   {
     path: 'cart',
