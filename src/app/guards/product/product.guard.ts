@@ -1,24 +1,25 @@
 import {CanActivateFn, Router} from '@angular/router';
-import {delay, map, of} from "rxjs";
+import {map} from "rxjs";
 import {inject} from "@angular/core";
+import {ProductService} from "../../services/product/product.service";
 
 export const productGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  return of(route.paramMap.get('id')!)
-    .pipe(
-      delay(1000),
-      map(id => {
-        if (['1', '2', '3'].includes(id)) {
-          route.data = {
-            ...route.data,
-            product: {
-              id,
-              name: `Product ${id}`,
-            }
-          }
-          return true;
+  const productService = inject(ProductService);
+
+  const {id} = route.params
+
+  return productService.getProduct(id).pipe(
+    map(product => {
+      if (product) {
+        // pass product to route data
+        route.data = {
+          ...route.data,
+          product
         }
-        return router.createUrlTree(['/not-found'])
-      })
-    )
+        return true;
+      }
+      return router.createUrlTree(['/not-found'])
+    })
+  )
 };
