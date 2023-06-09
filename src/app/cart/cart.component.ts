@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {CartItem} from "../models/cart-item";
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +9,9 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CartComponent {
 
-  items = this.route.snapshot.data['items'] as {id: string, name: string, quantity: number}[]
-  constructor(private route: ActivatedRoute) { }
+  items = this.route.snapshot.data['items'] as CartItem[]
+
+  constructor(private route: ActivatedRoute) {
+  }
 
 }
