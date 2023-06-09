@@ -43,6 +43,11 @@ p {
   margin-right: 16px;
 }
 
+.home {
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
   display: flex;
   margin: 82px auto 32px;
