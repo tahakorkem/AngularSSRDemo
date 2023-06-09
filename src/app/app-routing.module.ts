@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
+import {Data, RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {ProductComponent} from "./product/product.component";
 import {CartComponent} from "./cart/cart.component";
@@ -11,22 +11,38 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    data: {
+      titleFn: () => 'Home',
+      descriptionFn: () => 'Home page'
+    }
   },
   {
     path: 'product/:id',
     component: ProductComponent,
-    canActivate: [productGuard]
+    canActivate: [productGuard],
+    data: {
+      titleFn: (data: Data) => `${data["product"].name} - Details`,
+      descriptionFn: (data: Data) => `Description of ${data["product"].name}`
+    }
   },
   {
     path: 'cart',
     component: CartComponent,
     resolve: {
       items: cartItemsResolver
+    },
+    data: {
+      titleFn: () => 'Cart',
+      descriptionFn: () => 'Cart page'
     }
   },
   {
     path: 'not-found',
     component: NotFoundComponent,
+    data: {
+      titleFn: () => 'Not Found',
+      descriptionFn: () => 'Not Found page'
+    }
   },
   {path: '**', redirectTo: 'not-found'}
 ];
