@@ -15,6 +15,10 @@
   <a routerLink="/cart" routerLinkActive="active">Cart</a>
 </div>
 
+<div *ngIf="isLoading" class="progress-bar">
+  <div class="progress-bar-value"></div>
+</div>
+
 <div class="content" role="main">
 
   <router-outlet></router-outlet>

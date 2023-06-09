@@ -10,10 +10,19 @@ import {Meta, Title} from "@angular/platform-browser";
 export class AppComponent {
 
   platform: string = this.platformId.toString()
+  isLoading = false
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private titleService: Title, private metaService: Meta) {
     router.events.subscribe(event => {
       switch (event.type) {
+        case EventType.NavigationStart:
+          this.isLoading = true
+          break
+        case EventType.NavigationEnd:
+        case EventType.NavigationCancel:
+        case EventType.NavigationError:
+          this.isLoading = false
+          break
         case EventType.ActivationEnd:
           this.onRouteChange(event as ActivationEnd)
           break
