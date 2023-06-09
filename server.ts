@@ -1,11 +1,11 @@
 import 'zone.js/node';
-
 import {APP_BASE_HREF} from '@angular/common';
 import {ngExpressEngine} from '@nguniversal/express-engine';
 import * as express from 'express';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {AppServerModule} from './src/main.server';
+import {fakeApi} from "./src/fake.api.server";
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -27,6 +27,8 @@ export function app(): express.Express {
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
+
+  server.use('/api', fakeApi)
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
