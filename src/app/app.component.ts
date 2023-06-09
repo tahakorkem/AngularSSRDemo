@@ -1,6 +1,7 @@
 import {Component, Inject, PLATFORM_ID} from '@angular/core';
 import {ActivationEnd, EventType, Router} from "@angular/router";
 import {Meta, Title} from "@angular/platform-browser";
+import {ConfigService} from "./services/config/config.service";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ export class AppComponent {
 
   platform: string = this.platformId.toString()
   isLoading = false
+  config = this.configService.config
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private titleService: Title, private metaService: Meta) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private titleService: Title, private metaService: Meta, private configService: ConfigService) {
     router.events.subscribe(event => {
       switch (event.type) {
         case EventType.NavigationStart:
