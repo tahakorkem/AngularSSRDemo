@@ -1,1 +1,7 @@
 <p>home works!</p>
+
+
+<h3>Products:</h3>
+<ul>
+    <li *ngFor="let product of config.homePage.products"><a routerLink="/product/{{product.id}}">{{product.name}}</a></li>
+</ul>
