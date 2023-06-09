@@ -1,2 +1,13 @@
 <p>product works!</p>
 <h1>{{product.name}}</h1>
+
+<h2>Related products are:</h2>
+<ul *ngIf="relatedProducts$ | async as items; else loading">
+  <li *ngFor="let p of items">
+    <a [routerLink]="['/product', p.id]">{{p.name}}</a>
+  </li>
+</ul>
+
+<ng-template #loading>
+  <p>loading...</p>
+</ng-template>
