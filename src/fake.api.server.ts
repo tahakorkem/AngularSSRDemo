@@ -1,4 +1,5 @@
 import {Product} from "./app/models/product";
+import {Config} from "./app/models/config";
 import {CartItem} from "./app/models/cart-item";
 
 const express = require('express');
@@ -6,6 +7,35 @@ const express = require('express');
 export const fakeApi = express();
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+fakeApi.get('/config', async (req: any, res: any, next: any) => {
+  await delay(1000)
+  return res.json({
+    status: 'success',
+    data: {
+      toolbar: {
+        message: 'SSR is cool!',
+        color: "#3ba844"
+      },
+      homePage: {
+        products: [
+          {
+            id: '1',
+            name: 'Product 1'
+          },
+          {
+            id: '2',
+            name: 'Product 2'
+          },
+          {
+            id: '3',
+            name: 'Product 3'
+          }
+        ],
+      }
+    } as Config
+  });
+});
 
 fakeApi.get('/products/:productId', async (req: any, res: any, next: any) => {
   await delay(1000)
