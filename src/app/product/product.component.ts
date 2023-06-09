@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Product} from "../models/product";
 
 @Component({
   selector: 'app-product',
@@ -8,9 +8,6 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductComponent {
 
-  product = this.route.snapshot.data['product'] as { id: string, name: string }
-
-  constructor(private route: ActivatedRoute) {
-  }
+  product = this.route.snapshot.data['product'] as Product
 
 }
