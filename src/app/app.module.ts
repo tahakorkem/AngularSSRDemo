@@ -7,6 +7,8 @@ import {ProductComponent} from './product/product.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {NotFoundComponent} from './not-found/not-found.component';
 import {RandomIntPipe} from './pipes/random-int/random-int.pipe';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {BrowserStateInterceptor} from "./interceptors/browser-state.interceptor";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,17 @@ import {RandomIntPipe} from './pipes/random-int/random-int.pipe';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [provideClientHydration()],
+  providers: [
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BrowserStateInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
